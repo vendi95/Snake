@@ -1,0 +1,43 @@
+body{
+    background: #9c9;
+    margin: 0;
+    color: #222522;
+}
+.board{
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px #222522 solid;
+    position: relative;
+}
+.snake{
+    margin-left: 1px;
+    margin-top: 1px;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    background: #222522;
+}
+.food{
+    margin-left: 3px;
+    margin-top: 3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    position: absolute;
+    background: #222522;
+}
+.levelSelector{
+    width: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 40px;
+}
+
+.levelSelector input{
+    display: inline-block;
+}
+
+.levelSelector select{
+    display: inline-block;
+}
