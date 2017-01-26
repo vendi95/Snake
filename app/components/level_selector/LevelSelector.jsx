@@ -29,7 +29,7 @@ class LevelSelector extends React.Component {
       <select onChange={e => this.handleChange(e)} value={this.state.selected}>
         {children}
       </select>
-      <input type="button" value="Select" />
+      <input type="button" value="Restart" />
     </div>);
   }
 }
