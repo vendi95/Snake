@@ -1,4 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+import {restartAction} from '../../snake_model/actions/snakeActions';
+
 import Level from './Level';
 
 class LevelSelector extends React.Component {
@@ -16,6 +20,10 @@ class LevelSelector extends React.Component {
     e.preventDefault();
   }
 
+  handleSubmit(){
+    this.props.restart(this.props.levels[this.state.selected]);
+  }
+
   render() {
     const children = this.props.levels.map(
             (child, id) =>
@@ -29,9 +37,19 @@ class LevelSelector extends React.Component {
       <select onChange={e => this.handleChange(e)} value={this.state.selected}>
         {children}
       </select>
-      <input type="button" value="Restart" />
+      <input type="button" value="Restart" onClick={() => this.handleSubmit()}/>
     </div>);
   }
 }
 
-export default LevelSelector;
+function mapStateToProps(state) {
+    return state;
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        restart: level => dispatch(restartAction(level)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LevelSelector);

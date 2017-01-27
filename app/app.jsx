@@ -1,69 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
+import { Router, Route, browserHistory } from 'react-router';
 
 import SnakeStore from './snake_model/SnakeStore';
-import {initAction, stepAction} from './snake_model/actions/snakeActions';
-import Board from './components/board_elements/Board';
-import LevelSelector from './components/level_selector/LevelSelector';
+import {initAction} from './snake_model/actions/snakeActions';
+import Game from './components/Game'
+import Login from './components/Login'
+import Toplist from './components/toplist/Toplist'
 
 export default {
     run() {
-        const mockBoard = {
-            size: {
-                width: 10,
-                height: 20,
-            },
-            elements: [
-                {
-                    type: 'snake',
-                    position: {
-                        x: 4,
-                        y: 10,
-                    },
-                },
-                {
-                    type: 'snake',
-                    position: {
-                        x: 5,
-                        y: 10,
-                    },
-                },
-                {
-                    type: 'snake',
-                    position: {
-                        x: 6,
-                        y: 10,
-                    },
-                },
-                {
-                    type: 'food',
-                    position: {
-                        x: 5,
-                        y: 9,
-                    },
-                },
-            ],
-            head: {
-                x: 6,
-                y: 10,
-            }
-        };
-
         const levels = [
-            {
-                size: {
-                    width: 10,
-                    height: 10,
-                },
-                speed: 301,
-            },
             {
                 size: {
                     width: 20,
                     height: 20,
                 },
-                speed: 201,
+                speed: 300,
+            },
+            {
+                size: {
+                    width: 25,
+                    height: 25,
+                },
+                speed: 200,
             },
             {
                 size: {
@@ -74,18 +35,19 @@ export default {
             },
         ];
 
-        SnakeStore.dispatch(initAction(mockBoard));
+        const start = {
+            level: levels[0]
+        };
 
-        setInterval(function(){
-            SnakeStore.dispatch(stepAction({x: 0, y: 1}));
-        }, 300);
+        SnakeStore.dispatch(initAction(start));
 
         ReactDOM.render(
             <Provider store={SnakeStore}>
-                <div>
-                    <LevelSelector levels={levels}/>
-                    <Board/>
-                </div>
+                <Router history={browserHistory}>
+                    <Route path="/" component={Login} />
+                    <Route path="/play" component={Game} levels={levels}/>
+                    <Route path="/toplist" component={Toplist}/>
+                </Router>
             </Provider>,
             document.getElementById('container'));
     },

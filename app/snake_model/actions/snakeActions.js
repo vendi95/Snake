@@ -1,5 +1,8 @@
 const init = 'INIT';
 const step = 'STEP';
+const turn = 'TURN';
+const restart = 'RESTART';
+const setName = 'SET_NAME';
 
 function initAction(payload) {
     return {
@@ -8,18 +11,48 @@ function initAction(payload) {
     };
 }
 
-function stepAction(direction){
-    return{
+function turnAction(direction) {
+    return {
         payload:{
-            direction: direction,
+            direction: direction
         },
-        type: step
-    }
+        type: turn,
+    };
 }
 
-export{
+function restartAction(level) {
+    return {
+        payload:{
+            level: level
+        },
+        type: restart,
+    };
+}
+
+function setNameAction(name) {
+    return {
+        payload:{
+            name: name
+        },
+        type: setName,
+    };
+}
+
+function stepAction() {
+  return {
+    type: step,
+  };
+}
+
+export {
     initAction,
     stepAction,
+    turnAction,
+    restartAction,
+    setNameAction,
     init,
     step,
-}
+    turn,
+    restart,
+    setName,
+};
